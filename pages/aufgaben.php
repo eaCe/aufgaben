@@ -254,9 +254,20 @@ if ($func == '' || $func == 'filter') {
   $counter = new rex_aufgaben();
   $counter->show_counter();
 
+    if (rex_post('updateBadge') == "true")
+    {
+         ob_end_clean();
 
-  $list->setNoRowsMessage('<div class="alert alert-info" role="alert"><strong>Keine Aufgaben vorhanden.</strong><br/><br/>Mögliche Ursachen:<br/><br/><ul><li>es ist keine Aufgabe angelegt</li><li>keine der vorhandenen Aufgaben erfüllt auf die eingestellten Filterkriterien</li><li>die Ausgabe der erledigten Aufgaben ist abgeschaltet</li></ul></div>');
+        $sql_anzahl = rex_sql::factory();
+        $sql_anzahl->setTable('rex_aufgaben_aufgaben');
+        $sql_anzahl->setWhere('eigentuemer = ' . $current_user);
+        $sql_anzahl->select();
 
+        echo json_decode($sql_anzahl->getRows());
+
+        exit;
+    }
+    
   // --------------------
   //  Edit
   // --------------------
@@ -800,5 +811,22 @@ $("select.form-control").on('change', function () {
     }
 );
 
+
+jQuery(document).on('rex:ready', function (event, container) 
+{
+    jQuery.ajax(
+    {
+        method: "POST",
+        url: "<?= rex_url::currentBackendPage() ?>",
+        data: {"updateBadge": true},
+        success: function (data, textStatus, jqXHR)
+        {
+            jQuery("#rex-navi-page-aufgaben .label").text(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+        }
+    });
+});
 
 </script>
