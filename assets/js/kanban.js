@@ -203,9 +203,6 @@ redaxo.Kanban = redaxo.Kanban || (function (jQuery)
         var jCategoryName = jForm.find("#rex-aufgaben-aufgaben-kategorie-name");
         var jErrorContainer = jQuery("#missing-values");
 
-        console.log(jThis);
-        console.log("kategorieId", kategorieId);
-
         jErrorContainer.hide();
 
         jTitle.val("");
@@ -262,9 +259,6 @@ redaxo.Kanban = redaxo.Kanban || (function (jQuery)
         var jEigentuemer = jForm.find("#rex-aufgaben-aufgaben-eigentuemer");
         var jCategory = jForm.find("#rex-aufgaben-aufgaben-kategorie");
         var jErrorContainer = jQuery("#missing-values");
-
-        console.log(id);
-        console.log(jEntry.data());
 
         jErrorContainer.hide();
 

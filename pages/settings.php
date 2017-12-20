@@ -9,6 +9,8 @@ if ($func == 'update') {
   $this->setConfig(rex_post('config', [
         ['ansicht', 'string'],
         ['mails', 'array[string]'],
+        ['kanban-owner', 'string'],
+        ['kanban-prio', 'string'],
     ]));
 
   $content .= rex_view::info('Änderung gespeichert');
@@ -71,6 +73,15 @@ $n['field'] = $tableSelect->get();
 
 $formElements[] = $n;
 
+$n = [];
+$n['label'] = '<label for="kanban-owner">Kanban - Eigentümer anzeigen</label>';
+$n['field'] = '<input type="checkbox" id="kanban-owner" name="config[kanban-owner]"' . (!empty($this->getConfig('kanban-owner')) && $this->getConfig('kanban-owner') == '1' ? ' checked="checked"' : '') . ' value="1" />';
+$formElements[] = $n;
+
+$n = [];
+$n['label'] = '<label for="kanban-prio">Kanban - Priorität anzeigen</label>';
+$n['field'] = '<input type="checkbox" id="kanban-prio" name="config[kanban-prio]"' . (!empty($this->getConfig('kanban-prio')) && $this->getConfig('kanban-prio') == '1' ? ' checked="checked"' : '') . ' value="1" />';
+$formElements[] = $n;
 
 $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
