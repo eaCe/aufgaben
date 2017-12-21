@@ -1,8 +1,8 @@
 <?php
 
-if (rex::isBackend() && rex::getUser()) {
-
-  /* Einstellungen */
+if (rex::isBackend() && rex::getUser() && rex_be_controller::getCurrentPagePart(1) == 'aufgaben')
+{
+    /* Einstellungen */
 
   rex_view::addJSFile($this->getAssetsUrl('js/moments.js'));
   rex_view::addJSFile($this->getAssetsUrl('js/pikaday.js'));
